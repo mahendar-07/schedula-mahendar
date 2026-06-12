@@ -8,6 +8,8 @@ import { PatientModule } from './patient/patient.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DoctorProfile } from './doctor/entities/doctor-profile.entity';
+import { PatientProfile } from './patient/entities/patient-profile.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,7 +25,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User],
+        entities: [User,
+          DoctorProfile,
+          PatientProfile,
+        ],
         synchronize: true,
       }),
     }),
